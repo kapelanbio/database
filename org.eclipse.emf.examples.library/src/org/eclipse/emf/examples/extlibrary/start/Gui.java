@@ -75,14 +75,16 @@ public class Gui {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Thread thread = new Thread(new Runnable() {
-					
-					public void run() {
-						LibraryFactory.instance.save(new ProgressMonitor(frame, "Saving Library...", "", 0, 0), library);
-						JOptionPane.showMessageDialog(frame, "Library saved.");
-					}
-				});
-				thread.start();
+				if(((JButton) e.getSource()).isEnabled()) {
+					Thread thread = new Thread(new Runnable() {
+						
+						public void run() {
+							LibraryFactory.instance.save(new ProgressMonitor(frame, "Saving Library...", "", 0, 0), library);
+							JOptionPane.showMessageDialog(frame, "Library saved.");
+						}
+					});
+					thread.start();
+				}
 			}
 			
 		});
@@ -158,7 +160,7 @@ public class Gui {
 			for(Lendable lendable: borrowerRandom.getBorrowed())
 				if(lendable instanceof Book)
 					textAreaLibrary.append("\t" + ((Book) lendable).getTitle() + "\n");
-			
+				
 		} else {
 			buttonSave.setEnabled(false);
 			textAreaLibrary.setForeground(Color.RED);
