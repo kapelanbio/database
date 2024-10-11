@@ -37,10 +37,8 @@ public class LibraryFactory {
 				else
 					session.persist(library);
 			}
-			
 			transaction.commit();
 			
-			System.out.println("Library saved successfully to MySQL database!");
 		} catch(Exception e) {
 			if(transaction != null)
 				transaction.rollback();

@@ -53,8 +53,9 @@ public class Gui {
 				Thread thread = new Thread(new Runnable() {
 					
 					public void run() {
+						long time = System.currentTimeMillis();
 						library = LibraryFactory.instance.create(new ProgressMonitor(frame, "Creating Library...", "", 0, 0));
-						System.err.println();
+						System.err.println("Create Library: " + (System.currentTimeMillis() - time));
 						// update GUI in AWT thread
 						SwingUtilities.invokeLater(new Runnable() {
 							
@@ -81,7 +82,9 @@ public class Gui {
 					Thread thread = new Thread(new Runnable() {
 						
 						public void run() {
+							long time = System.currentTimeMillis();
 							LibraryFactory.instance.persistOrMerge(new ProgressMonitor(frame, "Saving Library...", "", 0, 0), library);
+							System.err.println("Save Library: " + (System.currentTimeMillis() - time));
 							JOptionPane.showMessageDialog(frame, "Library saved.");
 						}
 					});
@@ -102,8 +105,9 @@ public class Gui {
 				Thread thread = new Thread(new Runnable() {
 					
 					public void run() {
+						long time = System.currentTimeMillis();
 						library = LibraryFactory.instance.load(new ProgressMonitor(frame, "Loading Library...", "", 0, 0));
-						System.err.println();
+						System.err.println("Load Library: " + (System.currentTimeMillis() - time));
 						// update GUI in AWT thread
 						SwingUtilities.invokeLater(new Runnable() {
 							
@@ -147,6 +151,7 @@ public class Gui {
 	}
 	
 	private void fillLibraryTextArea(boolean updateSession) {
+		long time = System.currentTimeMillis();
 		Session session = null;
 		try {
 			if(library != null) {
@@ -181,6 +186,7 @@ public class Gui {
 		} finally {
 			if(session != null)
 				session.close();
+			System.err.println("Display library random data: " + (System.currentTimeMillis() - time));
 		}
 		
 	}
