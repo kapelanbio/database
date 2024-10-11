@@ -4,148 +4,137 @@
  *
  * $Id$
  */
+
 package org.eclipse.emf.examples.extlibrary.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.examples.extlibrary.Book;
 import org.eclipse.emf.examples.extlibrary.BookCategory;
 import org.eclipse.emf.examples.extlibrary.EXTLibraryPackage;
 import org.eclipse.emf.examples.extlibrary.Writer;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Book</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Book</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.BookImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.BookImpl#getPages <em>Pages</em>}</li>
  *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.BookImpl#getCategory <em>Category</em>}</li>
  *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.BookImpl#getAuthor <em>Author</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
+@Entity
 public class BookImpl extends CirculatingItemImpl implements Book {
+	
 	/**
 	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getTitle()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String TITLE_EDEFAULT = null;
-
+	protected static final String		TITLE_EDEFAULT		= null;
+	
 	/**
 	 * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getTitle()
 	 * @generated
 	 * @ordered
 	 */
-	protected String title = TITLE_EDEFAULT;
-
+	protected String					title				= TITLE_EDEFAULT;
+	
 	/**
 	 * The default value of the '{@link #getPages() <em>Pages</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getPages()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int PAGES_EDEFAULT = 100;
-
+	protected static final int			PAGES_EDEFAULT		= 100;
+	
 	/**
 	 * The cached value of the '{@link #getPages() <em>Pages</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getPages()
 	 * @generated
 	 * @ordered
 	 */
-	protected int pages = PAGES_EDEFAULT;
-
+	protected int						pages				= PAGES_EDEFAULT;
+	
 	/**
 	 * The default value of the '{@link #getCategory() <em>Category</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getCategory()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BookCategory CATEGORY_EDEFAULT = BookCategory.MYSTERY_LITERAL;
-
+	protected static final BookCategory	CATEGORY_EDEFAULT	= BookCategory.MYSTERY_LITERAL;
+	
 	/**
 	 * The cached value of the '{@link #getCategory() <em>Category</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getCategory()
 	 * @generated
 	 * @ordered
 	 */
-	protected BookCategory category = CATEGORY_EDEFAULT;
-
+	protected BookCategory				category			= CATEGORY_EDEFAULT;
+	
 	/**
 	 * The flag representing whether the Category attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int CATEGORY_ESETFLAG = 1 << 8;
-
+	protected static final int			CATEGORY_ESETFLAG	= 1 << 8;
+	
 	/**
 	 * The cached value of the '{@link #getAuthor() <em>Author</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getAuthor()
 	 * @generated
 	 * @ordered
 	 */
-	protected Writer author;
-
+	@ManyToOne(targetEntity = WriterImpl.class)
+	protected Writer					author;
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected BookImpl() {
 		super();
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
 		return EXTLibraryPackage.Literals.BOOK;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getTitle() {
 		return title;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setTitle(String newTitle) {
@@ -154,19 +143,17 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EXTLibraryPackage.BOOK__TITLE, oldTitle, title));
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public int getPages() {
 		return pages;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setPages(int newPages) {
@@ -175,19 +162,17 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EXTLibraryPackage.BOOK__PAGES, oldPages, pages));
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public BookCategory getCategory() {
 		return category;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setCategory(BookCategory newCategory) {
@@ -198,10 +183,9 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EXTLibraryPackage.BOOK__CATEGORY, oldCategory, category, !oldCategoryESet));
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void unsetCategory() {
@@ -212,19 +196,17 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.UNSET, EXTLibraryPackage.BOOK__CATEGORY, oldCategory, CATEGORY_EDEFAULT, oldCategoryESet));
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean isSetCategory() {
 		return (eFlags & CATEGORY_ESETFLAG) != 0;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Writer getAuthor() {
@@ -238,19 +220,17 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		}
 		return author;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Writer basicGetAuthor() {
 		return author;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public NotificationChain basicSetAuthor(Writer newAuthor, NotificationChain msgs) {
@@ -262,10 +242,9 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		}
 		return msgs;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setAuthor(Writer newAuthor) {
@@ -281,10 +260,9 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EXTLibraryPackage.BOOK__AUTHOR, newAuthor, newAuthor));
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -297,10 +275,9 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -311,10 +288,9 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -332,10 +308,9 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -356,10 +331,9 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		}
 		super.eSet(featureID, newValue);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -380,10 +354,9 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		}
 		super.eUnset(featureID);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -400,17 +373,16 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		}
 		return super.eIsSet(featureID);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (title: "); //$NON-NLS-1$
 		result.append(title);
 		result.append(", pages: "); //$NON-NLS-1$
@@ -420,5 +392,5 @@ public class BookImpl extends CirculatingItemImpl implements Book {
 		result.append(')');
 		return result.toString();
 	}
-
+	
 } //BookImpl

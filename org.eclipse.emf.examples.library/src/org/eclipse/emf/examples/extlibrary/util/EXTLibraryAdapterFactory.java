@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.eclipse.emf.examples.extlibrary.util;
 
@@ -86,10 +82,6 @@ public class EXTLibraryAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseItem(Item object) {
 				return createItemAdapter();
-			}
-			@Override
-			public Adapter caseLendable(Lendable object) {
-				return createLendableAdapter();
 			}
 			@Override
 			public Adapter caseCirculatingItem(CirculatingItem object) {
@@ -184,20 +176,6 @@ public class EXTLibraryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createItemAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.examples.extlibrary.Lendable <em>Lendable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.emf.examples.extlibrary.Lendable
-	 * @generated
-	 */
-	public Adapter createLendableAdapter() {
 		return null;
 	}
 

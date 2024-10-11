@@ -18,9 +18,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import org.eclipse.emf.examples.extlibrary.Book;
 import org.eclipse.emf.examples.extlibrary.Borrower;
-import org.eclipse.emf.examples.extlibrary.Lendable;
+import org.eclipse.emf.examples.extlibrary.CirculatingItem;
 import org.eclipse.emf.examples.extlibrary.Library;
 import org.eclipse.emf.examples.extlibrary.Writer;
+import org.hibernate.Session;
 
 public class Gui {
 	
@@ -53,11 +54,12 @@ public class Gui {
 					
 					public void run() {
 						library = LibraryFactory.instance.create(new ProgressMonitor(frame, "Creating Library...", "", 0, 0));
+						System.err.println();
 						// update GUI in AWT thread
 						SwingUtilities.invokeLater(new Runnable() {
 							
 							public void run() {
-								fillLibraryTextArea();
+								fillLibraryTextArea(false);
 							}
 						});
 						
@@ -79,7 +81,7 @@ public class Gui {
 					Thread thread = new Thread(new Runnable() {
 						
 						public void run() {
-							LibraryFactory.instance.save(new ProgressMonitor(frame, "Saving Library...", "", 0, 0), library);
+							LibraryFactory.instance.persistOrMerge(new ProgressMonitor(frame, "Saving Library...", "", 0, 0), library);
 							JOptionPane.showMessageDialog(frame, "Library saved.");
 						}
 					});
@@ -101,11 +103,12 @@ public class Gui {
 					
 					public void run() {
 						library = LibraryFactory.instance.load(new ProgressMonitor(frame, "Loading Library...", "", 0, 0));
+						System.err.println();
 						// update GUI in AWT thread
 						SwingUtilities.invokeLater(new Runnable() {
 							
 							public void run() {
-								fillLibraryTextArea();
+								fillLibraryTextArea(true);
 							}
 						});
 						
@@ -138,35 +141,48 @@ public class Gui {
 		frame.setLayout(null);
 		frame.setVisible(true);
 		
-		fillLibraryTextArea();
+		fillLibraryTextArea(false);
 		
 		return frame;
 	}
 	
-	private void fillLibraryTextArea() {
-		if(library != null) {
-			buttonSave.setEnabled(true);
-			textAreaLibrary.setForeground(Color.BLACK);
-			textAreaLibrary.setText(null);
-			textAreaLibrary.append("No. of books: " + library.getBooks().size() + "\n");
-			textAreaLibrary.append("No. of writers: " + library.getWriters().size() + "\n");
-			textAreaLibrary.append("No. of borrowers: " + library.getBorrowers().size() + "\n");
-			
-			Writer writerRandom = library.getWriters().get((int) (Math.random() * (library.getWriters().size() - 1)));
-			textAreaLibrary.append(writerRandom.getFirstName() + " " + writerRandom.getLastName() + " wrote " + writerRandom.getBooks().size() + " books.\n");
-			
-			Borrower borrowerRandom = library.getBorrowers().get((int) (Math.random() * (library.getBorrowers().size() - 1)));
-			textAreaLibrary.append(borrowerRandom.getFirstName() + " " + borrowerRandom.getLastName() + ":\nBorrowed Books:\n");
-			for(Lendable lendable: borrowerRandom.getBorrowed())
-				if(lendable instanceof Book)
-					textAreaLibrary.append("\t" + ((Book) lendable).getTitle() + "\n");
+	private void fillLibraryTextArea(boolean updateSession) {
+		Session session = null;
+		try {
+			if(library != null) {
+				buttonSave.setEnabled(true);
+				textAreaLibrary.setForeground(Color.BLACK);
+				textAreaLibrary.setText(null);
 				
-		} else {
-			buttonSave.setEnabled(false);
-			textAreaLibrary.setForeground(Color.RED);
-			textAreaLibrary.setText(null);
-			textAreaLibrary.setText("No library created or loaded.");
+				session = HibernateUtil.getSessionFactory().openSession();
+				
+				if(updateSession)
+					session.update(library);
+				
+				textAreaLibrary.append("No. of books: " + library.getBooks().size() + "\n");
+				textAreaLibrary.append("No. of writers: " + library.getWriters().size() + "\n");
+				//			textAreaLibrary.append("No. of borrowers: " + library.getBorrowers().size() + "\n");
+				
+				Writer writerRandom = library.getWriters().get((int) (Math.random() * (library.getWriters().size() - 1)));
+				textAreaLibrary.append(writerRandom.getFirstName() + " " + writerRandom.getLastName() + " wrote " + writerRandom.getBooks().size() + " books.\n");
+				
+				Borrower borrowerRandom = library.getBorrowers().get((int) (Math.random() * (library.getBorrowers().size() - 1)));
+				textAreaLibrary.append(borrowerRandom.getFirstName() + " " + borrowerRandom.getLastName() + ":\nBorrowed Books:\n");
+				for(CirculatingItem lendable: borrowerRandom.getBorrowed())
+					if(lendable instanceof Book)
+						textAreaLibrary.append("\t" + ((Book) lendable).getTitle() + "\n");
+					
+			} else {
+				buttonSave.setEnabled(false);
+				textAreaLibrary.setForeground(Color.RED);
+				textAreaLibrary.setText(null);
+				textAreaLibrary.setText("No library created or loaded.");
+			}
+		} finally {
+			if(session != null)
+				session.close();
 		}
+		
 	}
 	
 	private String getUsedMemory() {

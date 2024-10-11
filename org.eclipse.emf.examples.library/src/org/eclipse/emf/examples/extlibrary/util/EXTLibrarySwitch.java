@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.eclipse.emf.examples.extlibrary.util;
 
@@ -51,7 +47,7 @@ public class EXTLibrarySwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
@@ -75,7 +71,6 @@ public class EXTLibrarySwitch<T> extends Switch<T> {
 				T result = caseBook(book);
 				if (result == null) result = caseCirculatingItem(book);
 				if (result == null) result = caseItem(book);
-				if (result == null) result = caseLendable(book);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -100,17 +95,10 @@ public class EXTLibrarySwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EXTLibraryPackage.LENDABLE: {
-				Lendable lendable = (Lendable)theEObject;
-				T result = caseLendable(lendable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case EXTLibraryPackage.CIRCULATING_ITEM: {
 				CirculatingItem circulatingItem = (CirculatingItem)theEObject;
 				T result = caseCirculatingItem(circulatingItem);
 				if (result == null) result = caseItem(circulatingItem);
-				if (result == null) result = caseLendable(circulatingItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -204,21 +192,6 @@ public class EXTLibrarySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseItem(Item object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Lendable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Lendable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLendable(Lendable object) {
 		return null;
 	}
 

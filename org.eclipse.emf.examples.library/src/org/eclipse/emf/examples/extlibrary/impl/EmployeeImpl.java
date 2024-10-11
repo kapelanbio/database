@@ -1,67 +1,60 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
+
 package org.eclipse.emf.examples.extlibrary.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.examples.extlibrary.EXTLibraryPackage;
 import org.eclipse.emf.examples.extlibrary.Employee;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Employee</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Employee</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.EmployeeImpl#getManager <em>Manager</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
+@Entity
 public class EmployeeImpl extends PersonImpl implements Employee {
+	
 	/**
 	 * The cached value of the '{@link #getManager() <em>Manager</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getManager()
 	 * @generated
 	 * @ordered
 	 */
+	@ManyToOne(targetEntity = EmployeeImpl.class)
 	protected Employee manager;
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected EmployeeImpl() {
 		super();
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
 		return EXTLibraryPackage.Literals.EMPLOYEE;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Employee getManager() {
@@ -75,19 +68,17 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		}
 		return manager;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Employee basicGetManager() {
 		return manager;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setManager(Employee newManager) {
@@ -96,10 +87,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EXTLibraryPackage.EMPLOYEE__MANAGER, oldManager, manager));
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -111,10 +101,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -126,10 +115,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		}
 		super.eSet(featureID, newValue);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -141,10 +129,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		}
 		super.eUnset(featureID);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -155,5 +142,5 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		}
 		return super.eIsSet(featureID);
 	}
-
+	
 } //EmployeeImpl

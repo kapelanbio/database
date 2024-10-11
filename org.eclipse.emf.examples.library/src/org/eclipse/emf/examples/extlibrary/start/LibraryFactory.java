@@ -2,6 +2,7 @@
 package org.eclipse.emf.examples.extlibrary.start;
 
 import java.util.Date;
+import java.util.List;
 import javax.swing.ProgressMonitor;
 import org.eclipse.emf.examples.extlibrary.Book;
 import org.eclipse.emf.examples.extlibrary.BookCategory;
@@ -10,27 +11,72 @@ import org.eclipse.emf.examples.extlibrary.EXTLibraryFactory;
 import org.eclipse.emf.examples.extlibrary.Employee;
 import org.eclipse.emf.examples.extlibrary.Library;
 import org.eclipse.emf.examples.extlibrary.Writer;
+import org.eclipse.emf.examples.extlibrary.impl.LibraryImpl;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.event.internal.EntityState;
 
 public class LibraryFactory {
 	
-	public final static LibraryFactory	instance	= new LibraryFactory();
+	public final static LibraryFactory instance = new LibraryFactory();
 	
-	void save(final ProgressMonitor progressMonitor, Library library) {
-		// TODO Save to database
+	void persistOrMerge(final ProgressMonitor progressMonitor, Library library) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		
+		try {
+			transaction = session.beginTransaction();
+			
+			if(session.contains(library))
+				session.merge(library);
+			else {
+				EntityState state = EntityState.getEntityState(library, null, null, session.unwrap(SessionImplementor.class), true);
+				if(state == EntityState.DETACHED)
+					session.merge(library);
+				else
+					session.persist(library);
+			}
+			
+			transaction.commit();
+			
+			System.out.println("Library saved successfully to MySQL database!");
+		} catch(Exception e) {
+			if(transaction != null)
+				transaction.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		progressMonitor.setProgress(progressMonitor.getMaximum());
 	}
 	
 	Library load(final ProgressMonitor progressMonitor) {
-		Library library = null;
-		// TODO Load from database
-		return library;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		try {
+			List<LibraryImpl> libraryList = session.createQuery("FROM LibraryImpl", LibraryImpl.class).getResultList();
+			for(Library library: libraryList)
+				return library;
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		progressMonitor.setProgress(progressMonitor.getMaximum());
+		
+		return null;
 	}
 	
 	Library create(final ProgressMonitor progressMonitor) {
-		final int bookCount = 50000;
+		final int bookCount = 500000;
 		final int writerCount = bookCount / 10;
-		final int employeeCount = 10;
-		final int borrowerCount = 1000;
-		final int borrowedBooksMax = 10;
+		final int employeeCount = 100;
+		final int borrowerCount = 100;
+		final int borrowedBooksMax = 5;
 		
 		progressMonitor.setMaximum(bookCount + writerCount + employeeCount + borrowerCount);
 		
@@ -45,6 +91,7 @@ public class LibraryFactory {
 		manager.setAddress("ManagerAddress");
 		manager.setFirstName("ManagerFirstName");
 		manager.setLastName("ManagerLastName");
+		
 		library.getEmployees().add(manager);
 		
 		for(int i = 0; i < employeeCount; i++) {
@@ -90,4 +137,5 @@ public class LibraryFactory {
 		}
 		return library;
 	}
+	
 }

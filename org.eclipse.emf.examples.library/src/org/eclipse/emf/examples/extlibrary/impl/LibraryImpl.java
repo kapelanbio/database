@@ -4,396 +4,310 @@
  *
  * $Id$
  */
+
 package org.eclipse.emf.examples.extlibrary.impl;
 
 import java.util.Collection;
-
+import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.emf.examples.extlibrary.Book;
 import org.eclipse.emf.examples.extlibrary.Borrower;
 import org.eclipse.emf.examples.extlibrary.EXTLibraryPackage;
 import org.eclipse.emf.examples.extlibrary.Employee;
-import org.eclipse.emf.examples.extlibrary.Item;
 import org.eclipse.emf.examples.extlibrary.Library;
 import org.eclipse.emf.examples.extlibrary.Writer;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Library</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Library</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * <ul>
- *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getAddress <em>Address</em>}</li>
- *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getWriters <em>Writers</em>}</li>
- *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getEmployees <em>Employees</em>}</li>
- *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getBorrowers <em>Borrowers</em>}</li>
- *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getStock <em>Stock</em>}</li>
- *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getBooks <em>Books</em>}</li>
- *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getBranches <em>Branches</em>}</li>
- *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getParentBranch <em>Parent Branch</em>}</li>
- *   <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getPeople <em>People</em>}</li>
- * </ul>
  * </p>
+ * <ul>
+ * <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getAddress <em>Address</em>}</li>
+ * <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getId <em>Id</em>}</li>
+ * <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getWriters <em>Writers</em>}</li>
+ * <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getEmployees <em>Employees</em>}</li>
+ * <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getBorrowers <em>Borrowers</em>}</li>
+ * <li>{@link org.eclipse.emf.examples.extlibrary.impl.LibraryImpl#getBooks <em>Books</em>}</li>
+ * </ul>
  *
  * @generated
  */
+@Entity
 public class LibraryImpl extends EObjectImpl implements Library {
+	
 	/**
-	 * The default value of the '{@link #getAddress() <em>Address</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getAddress() <em>Address</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getAddress()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ADDRESS_EDEFAULT = null;
-
+	protected static final String	ADDRESS_EDEFAULT	= null;
+	
 	/**
-	 * The cached value of the '{@link #getAddress() <em>Address</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getAddress() <em>Address</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getAddress()
 	 * @generated
 	 * @ordered
 	 */
-	protected String address = ADDRESS_EDEFAULT;
-
+	protected String				address				= ADDRESS_EDEFAULT;
+	
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int		ID_EDEFAULT			= 0;
+	
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	protected int					id					= ID_EDEFAULT;
+	
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
-
+	protected static final String	NAME_EDEFAULT		= null;
+	
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
-
+	protected String				name				= NAME_EDEFAULT;
+	
 	/**
-	 * The cached value of the '{@link #getStock() <em>Stock</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStock()
+	 * The cached value of the '{@link #getWriters() <em>Writers</em>}' containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getWriters()
+	 * @generated NOT
+	 * @ordered
+	 */
+	@OneToMany(targetEntity = WriterImpl.class, cascade = CascadeType.ALL, orphanRemoval = true)
+	protected List<Writer>			writers;
+	
+	/**
+	 * The cached value of the '{@link #getEmployees() <em>Employees</em>}' containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getEmployees()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Item> stock;
-
+	@OneToMany(targetEntity = EmployeeImpl.class, cascade = CascadeType.ALL, orphanRemoval = true)
+	protected List<Employee>		employees;
+	
 	/**
-	 * The cached value of the '{@link #getBooks() <em>Books</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getBorrowers() <em>Borrowers</em>}' containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getBorrowers()
+	 * @generated
+	 * @ordered
+	 */
+	@OneToMany(targetEntity = BorrowerImpl.class, cascade = CascadeType.ALL, orphanRemoval = true)
+	protected List<Borrower>		borrowers;
+	
+	/**
+	 * The cached value of the '{@link #getBooks() <em>Books</em>}' containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getBooks()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
-	protected EList<Book> books;
-
+	@OneToMany(targetEntity = BookImpl.class, cascade = CascadeType.ALL, orphanRemoval = true)
+	protected List<Book>			books;
+	
 	/**
-	 * The cached value of the '{@link #getBranches() <em>Branches</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBranches()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Library> branches;
-
-	/**
-	 * The cached value of the '{@link #getPeople() <em>People</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPeople()
-	 * @generated
-	 * @ordered
-	 */
-	protected FeatureMap people;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected LibraryImpl() {
 		super();
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
 		return EXTLibraryPackage.Literals.LIBRARY;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getAddress() {
 		return address;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setAddress(String newAddress) {
 		String oldAddress = address;
 		address = newAddress;
-		if (eNotificationRequired())
+		if(eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EXTLibraryPackage.LIBRARY__ADDRESS, oldAddress, address));
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public int getId() {
+		return id;
+	}
+	
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setId(int newId) {
+		int oldId = id;
+		id = newId;
+		if(eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EXTLibraryPackage.LIBRARY__ID, oldId, id));
+	}
+	
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
-		if (eNotificationRequired())
+		if(eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EXTLibraryPackage.LIBRARY__NAME, oldName, name));
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
-	public EList<Writer> getWriters() {
-		return getPeople().list(EXTLibraryPackage.Literals.LIBRARY__WRITERS);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Employee> getEmployees() {
-		return getPeople().list(EXTLibraryPackage.Literals.LIBRARY__EMPLOYEES);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Borrower> getBorrowers() {
-		return getPeople().list(EXTLibraryPackage.Literals.LIBRARY__BORROWERS);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Item> getStock() {
-		if (stock == null) {
-			stock = new EObjectContainmentEList<Item>(Item.class, this, EXTLibraryPackage.LIBRARY__STOCK);
+	public List<Writer> getWriters() {
+		if(writers == null) {
+			writers = new EObjectContainmentEList.Resolving<Writer>(Writer.class, this, EXTLibraryPackage.LIBRARY__WRITERS);
 		}
-		return stock;
+		return writers;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
-	public EList<Book> getBooks() {
-		if (books == null) {
-			books = new EObjectResolvingEList<Book>(Book.class, this, EXTLibraryPackage.LIBRARY__BOOKS);
+	public List<Employee> getEmployees() {
+		if(employees == null) {
+			employees = new EObjectContainmentEList.Resolving<Employee>(Employee.class, this, EXTLibraryPackage.LIBRARY__EMPLOYEES);
+		}
+		return employees;
+	}
+	
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public List<Borrower> getBorrowers() {
+		if(borrowers == null) {
+			borrowers = new EObjectContainmentEList.Resolving<Borrower>(Borrower.class, this, EXTLibraryPackage.LIBRARY__BORROWERS);
+		}
+		return borrowers;
+	}
+	
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public List<Book> getBooks() {
+		if(books == null) {
+			books = new EObjectContainmentEList.Resolving<Book>(Book.class, this, EXTLibraryPackage.LIBRARY__BOOKS);
 		}
 		return books;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Library> getBranches() {
-		if (branches == null) {
-			branches = new EObjectContainmentWithInverseEList.Resolving<Library>(Library.class, this, EXTLibraryPackage.LIBRARY__BRANCHES, EXTLibraryPackage.LIBRARY__PARENT_BRANCH);
-		}
-		return branches;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Library getParentBranch() {
-		if (eContainerFeatureID() != EXTLibraryPackage.LIBRARY__PARENT_BRANCH) return null;
-		return (Library)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Library basicGetParentBranch() {
-		if (eContainerFeatureID() != EXTLibraryPackage.LIBRARY__PARENT_BRANCH) return null;
-		return (Library)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetParentBranch(Library newParentBranch, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParentBranch, EXTLibraryPackage.LIBRARY__PARENT_BRANCH, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setParentBranch(Library newParentBranch) {
-		if (newParentBranch != eInternalContainer() || (eContainerFeatureID() != EXTLibraryPackage.LIBRARY__PARENT_BRANCH && newParentBranch != null)) {
-			if (EcoreUtil.isAncestor(this, newParentBranch))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newParentBranch != null)
-				msgs = ((InternalEObject)newParentBranch).eInverseAdd(this, EXTLibraryPackage.LIBRARY__BRANCHES, Library.class, msgs);
-			msgs = basicSetParentBranch(newParentBranch, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EXTLibraryPackage.LIBRARY__PARENT_BRANCH, newParentBranch, newParentBranch));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public FeatureMap getPeople() {
-		if (people == null) {
-			people = new BasicFeatureMap(this, EXTLibraryPackage.LIBRARY__PEOPLE);
-		}
-		return people;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EXTLibraryPackage.LIBRARY__BRANCHES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getBranches()).basicAdd(otherEnd, msgs);
-			case EXTLibraryPackage.LIBRARY__PARENT_BRANCH:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetParentBranch((Library)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch(featureID) {
 			case EXTLibraryPackage.LIBRARY__WRITERS:
-				return ((InternalEList<?>)getWriters()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>) getWriters()).basicRemove(otherEnd, msgs);
 			case EXTLibraryPackage.LIBRARY__EMPLOYEES:
-				return ((InternalEList<?>)getEmployees()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>) getEmployees()).basicRemove(otherEnd, msgs);
 			case EXTLibraryPackage.LIBRARY__BORROWERS:
-				return ((InternalEList<?>)getBorrowers()).basicRemove(otherEnd, msgs);
-			case EXTLibraryPackage.LIBRARY__STOCK:
-				return ((InternalEList<?>)getStock()).basicRemove(otherEnd, msgs);
-			case EXTLibraryPackage.LIBRARY__BRANCHES:
-				return ((InternalEList<?>)getBranches()).basicRemove(otherEnd, msgs);
-			case EXTLibraryPackage.LIBRARY__PARENT_BRANCH:
-				return basicSetParentBranch(null, msgs);
-			case EXTLibraryPackage.LIBRARY__PEOPLE:
-				return ((InternalEList<?>)getPeople()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>) getBorrowers()).basicRemove(otherEnd, msgs);
+			case EXTLibraryPackage.LIBRARY__BOOKS:
+				return ((InternalEList<?>) getBooks()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case EXTLibraryPackage.LIBRARY__PARENT_BRANCH:
-				return eInternalContainer().eInverseRemove(this, EXTLibraryPackage.LIBRARY__BRANCHES, Library.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch(featureID) {
 			case EXTLibraryPackage.LIBRARY__ADDRESS:
 				return getAddress();
+			case EXTLibraryPackage.LIBRARY__ID:
+				return getId();
 			case EXTLibraryPackage.LIBRARY__NAME:
 				return getName();
 			case EXTLibraryPackage.LIBRARY__WRITERS:
@@ -402,81 +316,63 @@ public class LibraryImpl extends EObjectImpl implements Library {
 				return getEmployees();
 			case EXTLibraryPackage.LIBRARY__BORROWERS:
 				return getBorrowers();
-			case EXTLibraryPackage.LIBRARY__STOCK:
-				return getStock();
 			case EXTLibraryPackage.LIBRARY__BOOKS:
 				return getBooks();
-			case EXTLibraryPackage.LIBRARY__BRANCHES:
-				return getBranches();
-			case EXTLibraryPackage.LIBRARY__PARENT_BRANCH:
-				if (resolve) return getParentBranch();
-				return basicGetParentBranch();
-			case EXTLibraryPackage.LIBRARY__PEOPLE:
-				if (coreType) return getPeople();
-				return ((FeatureMap.Internal)getPeople()).getWrapper();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch(featureID) {
 			case EXTLibraryPackage.LIBRARY__ADDRESS:
-				setAddress((String)newValue);
+				setAddress((String) newValue);
+				return;
+			case EXTLibraryPackage.LIBRARY__ID:
+				setId((Integer) newValue);
 				return;
 			case EXTLibraryPackage.LIBRARY__NAME:
-				setName((String)newValue);
+				setName((String) newValue);
 				return;
 			case EXTLibraryPackage.LIBRARY__WRITERS:
 				getWriters().clear();
-				getWriters().addAll((Collection<? extends Writer>)newValue);
+				getWriters().addAll((Collection<? extends Writer>) newValue);
 				return;
 			case EXTLibraryPackage.LIBRARY__EMPLOYEES:
 				getEmployees().clear();
-				getEmployees().addAll((Collection<? extends Employee>)newValue);
+				getEmployees().addAll((Collection<? extends Employee>) newValue);
 				return;
 			case EXTLibraryPackage.LIBRARY__BORROWERS:
 				getBorrowers().clear();
-				getBorrowers().addAll((Collection<? extends Borrower>)newValue);
-				return;
-			case EXTLibraryPackage.LIBRARY__STOCK:
-				getStock().clear();
-				getStock().addAll((Collection<? extends Item>)newValue);
+				getBorrowers().addAll((Collection<? extends Borrower>) newValue);
 				return;
 			case EXTLibraryPackage.LIBRARY__BOOKS:
 				getBooks().clear();
-				getBooks().addAll((Collection<? extends Book>)newValue);
-				return;
-			case EXTLibraryPackage.LIBRARY__BRANCHES:
-				getBranches().clear();
-				getBranches().addAll((Collection<? extends Library>)newValue);
-				return;
-			case EXTLibraryPackage.LIBRARY__PARENT_BRANCH:
-				setParentBranch((Library)newValue);
-				return;
-			case EXTLibraryPackage.LIBRARY__PEOPLE:
-				((FeatureMap.Internal)getPeople()).set(newValue);
+				getBooks().addAll((Collection<? extends Book>) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch(featureID) {
 			case EXTLibraryPackage.LIBRARY__ADDRESS:
 				setAddress(ADDRESS_EDEFAULT);
+				return;
+			case EXTLibraryPackage.LIBRARY__ID:
+				setId(ID_EDEFAULT);
 				return;
 			case EXTLibraryPackage.LIBRARY__NAME:
 				setName(NAME_EDEFAULT);
@@ -490,75 +386,58 @@ public class LibraryImpl extends EObjectImpl implements Library {
 			case EXTLibraryPackage.LIBRARY__BORROWERS:
 				getBorrowers().clear();
 				return;
-			case EXTLibraryPackage.LIBRARY__STOCK:
-				getStock().clear();
-				return;
 			case EXTLibraryPackage.LIBRARY__BOOKS:
 				getBooks().clear();
-				return;
-			case EXTLibraryPackage.LIBRARY__BRANCHES:
-				getBranches().clear();
-				return;
-			case EXTLibraryPackage.LIBRARY__PARENT_BRANCH:
-				setParentBranch((Library)null);
-				return;
-			case EXTLibraryPackage.LIBRARY__PEOPLE:
-				getPeople().clear();
 				return;
 		}
 		super.eUnset(featureID);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch(featureID) {
 			case EXTLibraryPackage.LIBRARY__ADDRESS:
 				return ADDRESS_EDEFAULT == null ? address != null : !ADDRESS_EDEFAULT.equals(address);
+			case EXTLibraryPackage.LIBRARY__ID:
+				return id != ID_EDEFAULT;
 			case EXTLibraryPackage.LIBRARY__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case EXTLibraryPackage.LIBRARY__WRITERS:
-				return !getWriters().isEmpty();
+				return writers != null && !writers.isEmpty();
 			case EXTLibraryPackage.LIBRARY__EMPLOYEES:
-				return !getEmployees().isEmpty();
+				return employees != null && !employees.isEmpty();
 			case EXTLibraryPackage.LIBRARY__BORROWERS:
-				return !getBorrowers().isEmpty();
-			case EXTLibraryPackage.LIBRARY__STOCK:
-				return stock != null && !stock.isEmpty();
+				return borrowers != null && !borrowers.isEmpty();
 			case EXTLibraryPackage.LIBRARY__BOOKS:
 				return books != null && !books.isEmpty();
-			case EXTLibraryPackage.LIBRARY__BRANCHES:
-				return branches != null && !branches.isEmpty();
-			case EXTLibraryPackage.LIBRARY__PARENT_BRANCH:
-				return basicGetParentBranch() != null;
-			case EXTLibraryPackage.LIBRARY__PEOPLE:
-				return people != null && !people.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
+		if(eIsProxy())
+			return super.toString();
+		
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (address: "); //$NON-NLS-1$
 		result.append(address);
+		result.append(", id: "); //$NON-NLS-1$
+		result.append(id);
 		result.append(", name: "); //$NON-NLS-1$
 		result.append(name);
-		result.append(", people: "); //$NON-NLS-1$
-		result.append(people);
 		result.append(')');
 		return result.toString();
 	}
-
+	
 } //LibraryImpl

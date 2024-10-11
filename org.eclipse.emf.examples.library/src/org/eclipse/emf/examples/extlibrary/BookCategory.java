@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.eclipse.emf.examples.extlibrary;
 
@@ -55,10 +51,6 @@ public enum BookCategory implements Enumerator {
 	/**
 	 * The '<em><b>Mystery</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Mystery</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #MYSTERY_LITERAL
 	 * @model name="Mystery"
@@ -70,10 +62,6 @@ public enum BookCategory implements Enumerator {
 	/**
 	 * The '<em><b>Science Fiction</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Science Fiction</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #SCIENCE_FICTION_LITERAL
 	 * @model name="ScienceFiction"
@@ -85,10 +73,6 @@ public enum BookCategory implements Enumerator {
 	/**
 	 * The '<em><b>Biography</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Biography</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #BIOGRAPHY_LITERAL
 	 * @model name="Biography"
@@ -122,6 +106,8 @@ public enum BookCategory implements Enumerator {
 	 * Returns the '<em><b>Book Category</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static BookCategory get(String literal) {
@@ -138,6 +124,8 @@ public enum BookCategory implements Enumerator {
 	 * Returns the '<em><b>Book Category</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param name the name.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static BookCategory getByName(String name) {
@@ -154,6 +142,8 @@ public enum BookCategory implements Enumerator {
 	 * Returns the '<em><b>Book Category</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value the integer value.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static BookCategory get(int value) {
