@@ -159,10 +159,10 @@ public class Gui {
 				textAreaLibrary.setForeground(Color.BLACK);
 				textAreaLibrary.setText(null);
 				
-				session = HibernateUtil.getSessionFactory().openSession();
-				
-				if(updateSession)
+				if(updateSession) {
+					session = HibernateUtil.getSessionFactory().openSession();
 					session.update(library);
+				}
 				
 				textAreaLibrary.append("No. of books: " + library.getBooks().size() + "\n");
 				textAreaLibrary.append("No. of writers: " + library.getWriters().size() + "\n");
