@@ -70,7 +70,7 @@ public class LibraryFactory {
 	}
 	
 	Library create(final ProgressMonitor progressMonitor) {
-		final int bookCount = 500000;
+		final int bookCount = 5000;
 		final int writerCount = bookCount / 10;
 		final int employeeCount = 100;
 		final int borrowerCount = 100;
