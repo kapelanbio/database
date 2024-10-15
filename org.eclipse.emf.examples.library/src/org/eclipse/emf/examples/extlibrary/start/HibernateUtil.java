@@ -31,6 +31,10 @@ public class HibernateUtil {
 		Configuration configuration = new Configuration();
 		
 		addDatabaseToConfiguration(configuration, Database.H2_LOCAL);
+		
+		configuration.setProperty("hibernate.connection.username", "sa");
+		configuration.setProperty("hibernate.connection.password", "");
+		
 		addConnectionPoolToConfiguration(configuration, ConnectionPool.C3P0);
 		
 		configuration.setProperty("hibernate.hbm2ddl.auto", "update");
@@ -53,43 +57,31 @@ public class HibernateUtil {
 			case H2_LOCAL: {
 				configuration.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
 				configuration.setProperty("hibernate.connection.url", "jdbc:h2:~/test;AUTO_SERVER=TRUE");
-				configuration.setProperty("hibernate.connection.username", "sa");
-				configuration.setProperty("hibernate.connection.password", "");
 				break;
 			}
 			case H2_SERVER: {
 				configuration.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
 				configuration.setProperty("hibernate.connection.url", "jdbc:h2:tcp://87.106.141.12:9092/C:/Labimage/test;AUTO_SERVER=TRUE");
-				configuration.setProperty("hibernate.connection.username", "sa");
-				configuration.setProperty("hibernate.connection.password", "");
 				break;
 			}
 			case H2_INTRANET: {
 				configuration.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
 				configuration.setProperty("hibernate.connection.url", "jdbc:h2:tcp://192.168.18.79:9092/labimage;AUTO_SERVER=TRUE");
-				configuration.setProperty("hibernate.connection.username", "sa");
-				configuration.setProperty("hibernate.connection.password", "");
 				break;
 			}
 			case MARIA_DB_INTRANET: {
 				configuration.setProperty("hibernate.connection.driver_class", "org.mariadb.jdbc.Driver");
 				configuration.setProperty("hibernate.connection.url", "jdbc:mariadb://192.168.18.111:3306/labimage");
-				configuration.setProperty("hibernate.connection.username", "labimage");
-				configuration.setProperty("hibernate.connection.password", "labimage23");
 				break;
 			}
 			case MYSQL_INTRANET: {
 				configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
 				configuration.setProperty("hibernate.connection.url", "jdbc:mysql://192.168.18.111:3306/labimage");
-				configuration.setProperty("hibernate.connection.username", "labimage");
-				configuration.setProperty("hibernate.connection.password", "labimage23");
 				break;
 			}
 			case MSSQL_INTRANET: {
 				configuration.setProperty("hibernate.connection.driver_class", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
 				configuration.setProperty("hibernate.connection.url", "jdbc:sqlserver://192.168.18.94:1433;databaseName=labimage");
-				configuration.setProperty("hibernate.connection.username", "sa");
-				configuration.setProperty("hibernate.connection.password", "kbi2020");
 				break;
 			}
 			default:
