@@ -39,6 +39,18 @@
     	<artifactId>hibernate-core</artifactId>
     	<version>6.6.1.Final</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+	<dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>slf4j-api</artifactId>
+    	<version>2.0.16</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+	<dependency>
+    	<groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-simple</artifactId>
+    	<version>2.0.16</version>
+	</dependency>
 	<!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
 	<dependency>
     	<groupId>com.mchange</groupId>
@@ -51,11 +63,53 @@
     	<artifactId>hibernate-c3p0</artifactId>
     	<version>6.6.1.Final</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+	<dependency>
+    	<groupId>com.zaxxer</groupId>
+   		<artifactId>HikariCP</artifactId>
+    	<version>6.0.0</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-hikaricp -->
+	<dependency>
+    	<groupId>org.hibernate.orm</groupId>
+    	<artifactId>hibernate-hikaricp</artifactId>
+    	<version>6.6.1.Final</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/io.agroal/agroal-pool -->
+	<dependency>
+    	<groupId>io.agroal</groupId>
+    	<artifactId>agroal-pool</artifactId>
+    	<version>2.5</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-agroal -->
+	<dependency>
+	    <groupId>org.hibernate.orm</groupId>
+    	<artifactId>hibernate-agroal</artifactId>
+    	<version>6.6.1.Final</version>
+	</dependency>	
 	<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
 	<dependency>
     	<groupId>com.h2database</groupId>
     	<artifactId>h2</artifactId>
     	<version>2.3.232</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+	<dependency>
+   	 <groupId>com.mysql</groupId>
+   	 <artifactId>mysql-connector-j</artifactId>
+ 	   <version>9.0.0</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+	<dependency>
+  	  <groupId>org.mariadb.jdbc</groupId>
+ 	   <artifactId>mariadb-java-client</artifactId>
+ 	   <version>3.4.1</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+	<dependency>
+    	<groupId>com.microsoft.sqlserver</groupId>
+    	<artifactId>mssql-jdbc</artifactId>
+    	<version>12.8.1.jre11</version>
 	</dependency>
   </dependencies>
 </project>
