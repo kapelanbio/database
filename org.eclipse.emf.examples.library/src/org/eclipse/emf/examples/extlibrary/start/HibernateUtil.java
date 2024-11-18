@@ -19,7 +19,7 @@ public class HibernateUtil {
 	private static final SessionFactory sessionFactory = buildSessionFactory();
 	
 	private enum Database {
-		H2_LOCAL, H2_SERVER, H2_INTRANET, MARIA_DB_INTRANET, MYSQL_INTRANET, MSSQL_INTRANET
+		H2_LOCAL, H2_SERVER, H2_INTRANET, MARIA_DB_INTRANET, MARIA_DB_SERVER, MYSQL_INTRANET, MSSQL_INTRANET
 	}
 	
 	private enum ConnectionPool {
@@ -82,6 +82,11 @@ public class HibernateUtil {
 			case MSSQL_INTRANET: {
 				configuration.setProperty("hibernate.connection.driver_class", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
 				configuration.setProperty("hibernate.connection.url", "jdbc:sqlserver://192.168.18.94:1433;databaseName=labimage");
+				break;
+			}
+			case MARIA_DB_SERVER: {
+				configuration.setProperty("hibernate.connection.driver_class", "org.mariadb.jdbc.Driver");
+				configuration.setProperty("hibernate.connection.url", "jdbc:mariadb://87.106.141.12:3306/labimage");
 				break;
 			}
 			default:
